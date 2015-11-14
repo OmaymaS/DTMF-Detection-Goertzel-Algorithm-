@@ -40,9 +40,9 @@ The required system should be able to acquire data from an external source (whic
   
   * ADPS2:0 = 111	ADC pre-scaler select bits (division factor 128)
 
-[ADCSRA](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/ADCSRA.png)
-[ADMUX](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/ADMUX.png)
-[Timing Diagram](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/Timing%20Diagram.png)
+![ADCSRA](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/ADCSRA.png)
+![ADMUX](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/ADMUX.png)
+![Timing Diagram](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/Timing%20Diagram.png)
 
 ##Calculations and parameters selection
 
