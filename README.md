@@ -41,9 +41,19 @@ The required system should be able to acquire data from an external source (whic
   * ADPS2:0 = 111	ADC pre-scaler select bits (division factor 128)
 
 ![ADCSRA](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/ADCSRA.png)
+
 ![ADMUX](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/ADMUX.png)
+
 ![Timing Diagram](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/Timing%20Diagram.png)
 
 ##Calculations and parameters selection
+
+The telephone network operates within a bandwidth of approx. 300 to 3400 Hz which is suitable for voice communications. The sampling frequency of telephone systems is usually 8 KHz. However, in our system the internal ADC of the AVR board is used with different sampling rate according to the selected division factor. The block size N can be arbitrarily selected considering the balance between accuracy and detection time. The different standards suggest certain values to be used in the telephone systems. For our application we will select different values and test the results.
+
+	* According to the selected division factor (128), the ADC clock is at 125 KHz. And according to timing diagram, the conversion time is 13 cycles.
+	* The sampling frequency equals (125 KHz)/(13 Cycles)=9615.38 sample/sec and the sampling time is 0.104 ms 
+	* For our system the selected value of N=96. Accordingly, the frequency resolution (or main lobe width) is determined
+by fs/N=100. 
+ * The time required to receive N samples equals 96*0.104ms=9.98 ms.
 
 
