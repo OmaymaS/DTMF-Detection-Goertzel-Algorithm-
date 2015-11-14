@@ -20,3 +20,24 @@ This implementation provides unique characteristics for the system such as:
 
 Such features simplify DTMF decoding where the eight DTMF frequencies should be differentiated in order to detect valid DTMF tones and distinguish them from speech. A series of checks are always carried out at the receiver side in order to detect the tones and validate them based on the criteria of the used standard. The common algorithm used for DTMF detection is Goertzel algorithm which is similar to FFT but faster.
 
+#System Analysis
+
+##ADC Settings
+The required system should be able to acquire data from an external source (which is a standalone program in our case) and use the ADC in order to get the samples to be used in calculations for DTMF detection. The given AVR board includes an ADC which can run either in a single-conversion mode or a free-running mode. In the free running mode the ADC is constantly sampling and updating the ADC Data
+Register. The samples are taken at the maximum speed and the interrupts can be used for reading results. The timing diagram shows the conversion cycles and the following settings should be used to use free-running mode at 125 KHz with interrupts:
+
+  *ADEN = 1	Enable ADC
+  
+  *ADSC = 1	Start continuous conversion 
+  
+  *ADIF	
+      *Set when an ADC conversion completes and the data registers are updated
+      *cleared by hardware when executing the corresponding interrupt handling vector
+      
+  *ADFR = 1	Enable free running mode
+  
+  *ADIE = 1	Enable ADC interrupt 
+  
+  *ADPS2:0 = 111	ADC pre-scaler select bits (division factor 128)
+
+
