@@ -54,6 +54,25 @@ The telephone network operates within a bandwidth of approx. 300 to 3400 Hz whic
 * The sampling frequency equals (125 KHz)/(13 Cycles)=9615.38 sample/sec and the sampling time is 0.104 ms 
 * For our system the selected value of N=96. Accordingly, the frequency resolution (or main lobe width) is determined
 by fs/N=100. 
- * The time required to receive N samples equals 96*0.104ms=9.98 ms.
+* The time required to receive N samples equals 96*0.104ms=9.98 ms.
+
+
+#System Design
+
+Using the previous settings for the ADC and considering the calculated values the software was developed to detect DTMF digits and display results. The following are some notes regarding the design:
+* The ADC is used with division factor 128 in free running mode with interrupts.  
+* The ADC readings are downscaled to avoid overflow or dealing with large values.
+* Fixed-point arithmetic is used instead of floating point for faster response and better performance on the microcontroller. (Note: Floating point was also tried and provided the desired result; however the final version uses fixed-point for the previously mentioned reasons.)
+* As per the given data, both the tone duration is and the inter-digit interval equal 90 ms. Due to the fast detection, the same digit might be decoded several times in a row within the 90 ms. Therefore, the system includes checks to avoid displaying the same digit more than once.
+*	A detected tone is considered valid when only one row and one column frequency exceed a certain threshold. Another possible check is to make sure the percentage of the sum of powers of the dominant frequencies is sufficiently large. In the designed system, the threshold test is used. It was found during the debugging that in case of no signal or pause the samples read are zeros and consequently the power at the eight frequencies. On the other hand when there is a tone, the dominant row/column frequency power exceeds 1000 which can be taken as a threshold. These values may vary under different conditions.
+
+
+The functionality of the system is summarized as follows:
+* The system reads the ADC values continuously to fill the sample array (buffer) with size equals to block size N.
+* Once the array has been filled with N samples a flag s raised by the ADC ISR to proceed with Goertzel calculations in the main function.
+* Goertzel function is called to calculate the power at the eight DTMF frequencies.
+* Post_test() function is called to find the row/column frequency corresponding to the highest power. In case there was a valid digit detected, the digit is displayed on the LCD and the 7-sgment display.
+* When a pause/no valid tone is detected the new_dig flag is raised to indicate that the next detected digit should be displayed. Once the digit has been displayed, the new_dig flag is set to zero to stop displaying the same digit more than once.
+
 
 
