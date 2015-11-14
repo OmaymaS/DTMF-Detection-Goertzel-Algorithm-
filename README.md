@@ -18,6 +18,7 @@ This implementation provides unique characteristics for the system such as:
 
 Such features simplify DTMF decoding where the eight DTMF frequencies should be differentiated in order to detect valid DTMF tones and distinguish them from speech. A series of checks are always carried out at the receiver side in order to detect the tones and validate them based on the criteria of the used standard. The common algorithm used for DTMF detection is Goertzel algorithm which is similar to FFT but faster.
 
+
 #System Analysis
 
 ##ADC Settings
@@ -69,4 +70,13 @@ The functionality of the system is summarized as follows:
 
 #Flow Diagram
 ![Flow Diagram](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/Flowdiagram.png)
+
+#System Evaluation and Possible Improvements
+
+The designed system was tested to check its expected functionality and the following are some points summarizing the evaluation of the system: 
+* The system detects the valid tones and displays the corresponding digit or sequence of digits. And the volume should be adjusted to receive values with proper values.
+* The block size N can be increased because the digit duration is long enough to increase the detection time without missing a digit. 
+* The system was not implemented in a real telephone line to check all possible practical factors affecting the performance such as the losses in the long telephone cables or the interference with speech signals. 
+* The post-tests were limited the threshold test and the threshold values were selected according to what was found during the debugging based on the calculations and scaling of the values. However, in case of different calculations, the thresholds should be rechecked.
+* In more complicated systems, further tests can be performed to avoid false detection. These tests can include the twist test where the ration between row level and column level is checked against a pre-defined range. Also, the harmonic test can be carried out to check the energy of the second harmonic which should not be high in case of DTMF, unlike the speech signals.
 
