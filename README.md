@@ -40,7 +40,7 @@ The required system should be able to acquire data from an external source (whic
 
 ![Timing Diagram](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/Timing%20Diagram.png)
 
-##Calculations and parameters selection
+## Calculations and parameters selection
 
 The telephone network operates within a bandwidth of approx. 300 to 3400 Hz which is suitable for voice communications. The sampling frequency of telephone systems is usually 8 KHz. However, in our system the internal ADC of the AVR board is used with different sampling rate according to the selected division factor. The block size N can be arbitrarily selected considering the balance between accuracy and detection time. The different standards suggest certain values to be used in the telephone systems. For our application we will select different values and test the results.
 
@@ -71,7 +71,7 @@ The functionality of the system is summarized as follows:
 # Flow Diagram
 ![Flow Diagram](https://github.com/OmaymaS/DTMF-Detection-Goertzel-Algorithm-/blob/master/Images/Flowdiagram.png)
 
-#System Evaluation and Possible Improvements
+# System Evaluation and Possible Improvements
 
 The designed system was tested to check its expected functionality and the following are some points summarizing the evaluation of the system: 
 * The system detects the valid tones and displays the corresponding digit or sequence of digits. And the volume should be adjusted to receive values with proper values.
